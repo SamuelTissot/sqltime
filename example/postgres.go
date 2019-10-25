@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/SamuelTissot/sqltime"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"reflect"
-	"sqltime"
 )
 
 // redefine the gorm base model

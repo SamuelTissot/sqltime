@@ -1,4 +1,4 @@
-module sqltime
+module github.com/SamuelTissot/sqltime
 
 go 1.13
 
