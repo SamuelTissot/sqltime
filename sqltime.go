@@ -4,7 +4,7 @@
 // particularly useful for testing
 //
 // ATTENTION : this type will truncate the value of time.Time resulting in a data loss of magniture of the value
-// of Truncate
+// of RoundOff
 package sqltime
 
 import (
@@ -15,7 +15,7 @@ import (
 
 // the degree of precision to REMOVE
 // Default time.Microsecond
-var Truncate = time.Microsecond
+var RoundOff = time.Millisecond
 
 // Local the timezone the database is set to
 // default UTC
@@ -52,5 +52,5 @@ func Date(year int, month time.Month, day, hour, min, sec, nsec int, loc *time.L
 }
 
 func format(t time.Time) time.Time {
-	return t.In(DatabaseLocation).Truncate(Truncate)
+	return t.In(DatabaseLocation).Round(RoundOff)
 }
