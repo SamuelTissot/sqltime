@@ -34,6 +34,10 @@ func main() {
 	//create model
 	e := TestModel{
 		Data: "foo bar fizz",
+		Base: Base{
+			CreatedAt: sqltime.Now(),
+			UpdatedAt: sqltime.Now(),
+		},
 	}
 	db.Create(&e)
 
@@ -45,6 +49,8 @@ func main() {
 	if reflect.DeepEqual(e, f) {
 		fmt.Println("Success the models are equal")
 	} else {
+		fmt.Println(e)
+		fmt.Println(f)
 		fmt.Println("boo, not equal")
 	}
 }

@@ -33,21 +33,24 @@ func (t *Time) Scan(value interface{}) error {
 	if !ok {
 		return fmt.Errorf("dbtime could not convert value into time.Time. value: %v", value)
 	}
-	*t = Time{rt.In(DatabaseLocation).Truncate(Truncate)}
+	*t = Time{format(rt)}
 	return nil
 }
 
 func (t Time) Value() (driver.Value, error) {
-	return t.Time.Truncate(Truncate), nil
+	return format(t.Time), nil
 }
 
 // Now wrapper around the time.Now() function
 func Now() Time {
-	return Time{time.Now()}
+	return Time{format(time.Now())}
 }
 
 // Date wrapper around the time.Date() function
 func Date(year int, month time.Month, day, hour, min, sec, nsec int, loc *time.Location) Time {
-	return Time{time.Date(year, month, day, hour, min, sec, nsec, loc)}
+	return Time{format(time.Date(year, month, day, hour, min, sec, nsec, loc))}
 }
 
+func format(t time.Time) time.Time {
+	return t.In(DatabaseLocation).Truncate(Truncate)
+}
