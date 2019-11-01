@@ -22,6 +22,7 @@ type TestModel struct {
 }
 
 func main() {
+	// change the dataSourceName value
 	db, err := gorm.Open("postgres", "host=127.0.0.1 port=5432 user=postgres dbname=postgres password=postgres sslmode=disable")
 	if err != nil {
 		panic(err)
@@ -66,5 +67,4 @@ func setup(db *gorm.DB) {
 				deleted_at    timestamp
 			);
 		`)
-
 }

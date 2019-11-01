@@ -28,6 +28,7 @@ type Time struct {
 	time.Time
 }
 
+// satisfy the sql.scanner interface
 func (t *Time) Scan(value interface{}) error {
 	rt, ok := value.(time.Time)
 	if !ok {
@@ -37,8 +38,9 @@ func (t *Time) Scan(value interface{}) error {
 	return nil
 }
 
+// satifies the driver.Value interface
 func (t Time) Value() (driver.Value, error) {
-	return format(t.Time), nil
+	return format(t.Time), nil //format just in case
 }
 
 // Now wrapper around the time.Now() function
@@ -51,6 +53,7 @@ func Date(year int, month time.Month, day, hour, min, sec, nsec int, loc *time.L
 	return Time{format(time.Date(year, month, day, hour, min, sec, nsec, loc))}
 }
 
+// insure the correct format
 func format(t time.Time) time.Time {
 	return t.In(DatabaseLocation).Truncate(TruncateOff)
 }

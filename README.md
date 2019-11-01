@@ -35,8 +35,9 @@ sqltime.Truncate = time.Microsecond
 example
 ----
 
-see a full example [here](/example/postgres.go). The example assumes that the database is set
+see a full example [here](/example/). The example assumes that the database is set
  to the default timezone of `UTC` if not please update the `sqltime.DatabaseLocation`.
+
 
 
 
@@ -53,7 +54,7 @@ package Model
 import "github.com/SamuelTissot/sqltime"
 
 // define the model
-type BaseModel struct {
+type Model struct {
 	ID         uint `gorm:"primary_key"`
 	CreatedAt sqltime.Time  `gorm:"type:timestamp"`
 	UpdatedAt sqltime.Time  `gorm:"type:timestamp"`
